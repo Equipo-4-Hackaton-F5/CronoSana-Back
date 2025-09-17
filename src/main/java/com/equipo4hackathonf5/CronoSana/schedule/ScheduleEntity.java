@@ -1,7 +1,6 @@
-package com.equipo4hackathonf5.CronoSana.Schedule;
+package com.equipo4hackathonf5.CronoSana.schedule;
 
 import com.equipo4hackathonf5.CronoSana.medicine.MedicineEntity;
-import com.equipo4hackathonf5.CronoSana.medicine.MedicineStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,11 +24,6 @@ public class ScheduleEntity {
 
     @Column(name = "times_per_day")
     private Integer timesPerDay;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    @Builder.Default
-    private MedicineStatus status = MedicineStatus.PENDING;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "medicine_id")

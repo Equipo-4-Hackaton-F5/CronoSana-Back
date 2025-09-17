@@ -1,4 +1,4 @@
-package com.equipo4hackathonf5.CronoSana.medicine;
+package com.equipo4hackathonf5.CronoSana.schedule;
 
 public enum MedicineStatus {
     PENDING,
