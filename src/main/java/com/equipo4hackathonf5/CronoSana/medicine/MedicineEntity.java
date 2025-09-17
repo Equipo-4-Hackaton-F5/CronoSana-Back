@@ -27,21 +27,4 @@ public class MedicineEntity {
 
     @Column(name = "dose", nullable = false)
     private String dose;
-
-    @Column(name = "scheduled_hour", nullable = false)
-    @JsonFormat(pattern = "HH:mm")
-    private LocalDateTime scheduledHour;
-
-    @Column(name = "taken_hour")
-    private LocalDateTime takenHour;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    @Builder.Default
-    private MedicineStatus status = MedicineStatus.PENDING;
-
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false)
-    @Builder.Default
-    private LocalDateTime createdAt = LocalDateTime.now();
 }
