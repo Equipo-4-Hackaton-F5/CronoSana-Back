@@ -22,7 +22,7 @@ public class DoseLogEntity {
 
     @ManyToOne
     @JoinColumn(name = "schedule_id")
-    private ScheduleEntity scheduleId;
+    private ScheduleEntity schedule;
 
     @Column(name = "scheduled_hour", nullable = false)
     private LocalDateTime scheduledHour;
