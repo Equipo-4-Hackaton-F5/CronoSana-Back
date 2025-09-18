@@ -25,8 +25,8 @@ public class DoseLogServiceImpl implements InterfaceDoseLogService {
     public List<DoseLogResponseDTO> getEntities() {
         List<DoseLogResponseDTO> doseLogs = new ArrayList<>();
 
-        repository.findAll().forEach(с -> {
-            DoseLogResponseDTO dto = DoseLogMapper.toDTO(с);
+        repository.findAll().forEach(c -> {
+            DoseLogResponseDTO dto = DoseLogMapper.toDTO(c);
             doseLogs.add(dto);
         });
 
