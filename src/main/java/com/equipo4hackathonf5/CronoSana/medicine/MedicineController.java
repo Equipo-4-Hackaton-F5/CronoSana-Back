@@ -19,7 +19,7 @@ import com.equipo4hackathonf5.CronoSana.medicine.dtos.MedicineResponseDTO;
 
 
 @RestController
-@RequestMapping(path = "${api-endpoint}medicines")
+@RequestMapping("/api/medicines")
 public class MedicineController {
 
     private final IService<MedicineResponseDTO, MedicineRequestDTO> service;
@@ -28,12 +28,12 @@ public class MedicineController {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping("")
     public ResponseEntity<List<MedicineResponseDTO>> getAllMedicines() {
         return ResponseEntity.ok(service.getEntities());
     }
 
-    @PostMapping
+    @PostMapping("")
     public ResponseEntity<MedicineResponseDTO> createMedicine(@RequestBody MedicineRequestDTO dto) {
         MedicineResponseDTO createdMedicine = service.createEntity(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdMedicine);
