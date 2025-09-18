@@ -17,7 +17,7 @@ public class MedicineServiceImpl implements InterfaceMedicineService{
     private final MedicineRepository repository;
 
     @Override
-    public List<MedicineResponseDTO> getMedicineEntities() {
+    public List<MedicineResponseDTO> getEntities() {
         List<MedicineResponseDTO> medicines = new ArrayList<>();
 
         repository.findAll().forEach(c -> {
@@ -28,18 +28,38 @@ public class MedicineServiceImpl implements InterfaceMedicineService{
         return medicines;
     }
 
-    /* @Override
-    public MedicineResponseDTO createEntity(MedicineRequestDTO patientRequestDTO) {
-        MedicineEntity patient = MediciMapper.toEntity(patientRequestDTO);
-        PatientEntity patientStored = repository.save(patient);
-        return PatientMapper.toDTO(patientStored) ;
+    @Override
+    public MedicineResponseDTO createEntity(MedicineRequestDTO medicineRequestDTO) {
+        MedicineEntity medicine = MedicineMapper.toEntity(medicineRequestDTO);
+        MedicineEntity medicineStored = repository.save(medicine);
+        return MedicineMapper.toDTO(medicineStored) ;
     }
 
     @Override
-    public PatientResponseDTO getById(Long id) {
-        PatientEntity patient = repository.findById(id).orElseThrow(() -> new PatientNotFoundExceptions("Paciente no encontrado. Id " + id + " no existe."));
-        return PatientMapper.toDTO(patient);
-    } */
+    public MedicineResponseDTO getById(Long id) {
+        MedicineEntity medicine = repository.findById(id).orElseThrow(() -> new RuntimeException("Medicamento no encontrado. Id " + id + " no existe."));
+        return MedicineMapper.toDTO(medicine);
+    }
+
+    @Override
+    public MedicineResponseDTO updateEntity(Long id, MedicineRequestDTO medicineRequestDTO) {
+        MedicineEntity medicine = repository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Medicamento no encontrado con id: " + id));
+
+        medicine.setName(medicineRequestDTO.name());
+        medicine.setDose(medicineRequestDTO.dose());
+
+        MedicineEntity updatedEntity = repository.save(medicine);
+        return MedicineMapper.toDTO(updatedEntity);
+
+    }
+
+    @Override
+    public void deleteEntity(Long id) {
+        MedicineEntity entity = repository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Medicamento no encontrado con id: " + id));
+        repository.delete(entity);
+    }
 
 
 
