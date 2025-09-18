@@ -20,13 +20,14 @@ public class DoseLogServiceImpl implements InterfaceDoseLogService {
 
     private final DoseLogRepository repository;
     private final ScheduleRepository scheduleRepository;
+    private final DoseLogMapper doseLogMapper;
 
     @Override
     public List<DoseLogResponseDTO> getEntities() {
         List<DoseLogResponseDTO> doseLogs = new ArrayList<>();
 
         repository.findAll().forEach(c -> {
-            DoseLogResponseDTO dto = DoseLogMapper.toDTO(c);
+            DoseLogResponseDTO dto = doseLogMapper.toDTO(c);
             doseLogs.add(dto);
         });
 
@@ -38,17 +39,17 @@ public class DoseLogServiceImpl implements InterfaceDoseLogService {
         ScheduleEntity schedule = scheduleRepository.findById(dtoRequest.scheduleId())
                 .orElseThrow(() -> new RuntimeException("Schedule not found"));
 
-        DoseLogEntity doseLog = DoseLogMapper.toEntity(dtoRequest, schedule);
+        DoseLogEntity doseLog = doseLogMapper.toEntity(dtoRequest, schedule);
         DoseLogEntity saved = repository.save(doseLog);
 
-        return DoseLogMapper.toDTO(saved);
+        return doseLogMapper.toDTO(saved);
     }
 
     @Override
     public DoseLogResponseDTO getById(Long id) {
         DoseLogEntity entity = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("DoseLog no encontrada. Id " + id + " no existe."));
-        return DoseLogMapper.toDTO(entity);
+        return doseLogMapper.toDTO(entity);
     }
 
     @Override
@@ -64,7 +65,7 @@ public class DoseLogServiceImpl implements InterfaceDoseLogService {
             entity.setStatus(dtoRequest.status());
 
         DoseLogEntity updated = repository.save(entity);
-        return DoseLogMapper.toDTO(updated);
+        return doseLogMapper.toDTO(updated);
     }
 
     @Override
@@ -82,14 +83,14 @@ public class DoseLogServiceImpl implements InterfaceDoseLogService {
         entity.setTakenAt(LocalDateTime.now());
 
         DoseLogEntity updated = repository.save(entity);
-        return DoseLogMapper.toDTO(updated);
+        return doseLogMapper.toDTO(updated);
     }
 
     public List<DoseLogResponseDTO> getBySchedule(Long scheduleId) {
         List<DoseLogResponseDTO> doseLogs = new ArrayList<>();
 
         repository.findByScheduleId(scheduleId).forEach(entity -> {
-            doseLogs.add(DoseLogMapper.toDTO(entity));
+            doseLogs.add(doseLogMapper.toDTO(entity));
         });
 
         return doseLogs;
@@ -99,7 +100,7 @@ public class DoseLogServiceImpl implements InterfaceDoseLogService {
         List<DoseLogResponseDTO> doseLogs = new ArrayList<>();
 
         repository.findByStatus(MedicineStatus.PENDING).forEach(entity -> {
-            doseLogs.add(DoseLogMapper.toDTO(entity));
+            doseLogs.add(doseLogMapper.toDTO(entity));
         });
 
         return doseLogs;
