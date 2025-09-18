@@ -7,7 +7,6 @@ public class MedicineMapper {
     public static MedicineEntity toEntity(MedicineRequestDTO dtoRequest) {
         MedicineEntity medicine = new MedicineEntity();
         medicine.setName(dtoRequest.name());
-        medicine.setDescription(dtoRequest.description());
         medicine.setDose(dtoRequest.dose());
 
         return medicine;
@@ -17,7 +16,6 @@ public class MedicineMapper {
         MedicineResponseDTO dtoResponse = new MedicineResponseDTO(
             entity.getId(),
             entity.getName(),
-            entity.getDescription(),
             entity.getDose()
         );
 
