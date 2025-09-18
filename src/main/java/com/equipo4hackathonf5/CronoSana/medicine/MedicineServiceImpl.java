@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.equipo4hackathonf5.CronoSana.medicine.dtos.MedicineRequestDTO;
 import com.equipo4hackathonf5.CronoSana.medicine.dtos.MedicineResponseDTO;
 
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ public class MedicineServiceImpl implements InterfaceMedicineService{
     private final MedicineRepository repository;
 
     @Override
-    public List<MedicineResponseDTO> getEntities() {
+    public List<MedicineResponseDTO> getMedicineEntities() {
         List<MedicineResponseDTO> medicines = new ArrayList<>();
 
         repository.findAll().forEach(c -> {
@@ -26,6 +27,19 @@ public class MedicineServiceImpl implements InterfaceMedicineService{
 
         return medicines;
     }
+
+    /* @Override
+    public MedicineResponseDTO createEntity(MedicineRequestDTO patientRequestDTO) {
+        MedicineEntity patient = MediciMapper.toEntity(patientRequestDTO);
+        PatientEntity patientStored = repository.save(patient);
+        return PatientMapper.toDTO(patientStored) ;
+    }
+
+    @Override
+    public PatientResponseDTO getById(Long id) {
+        PatientEntity patient = repository.findById(id).orElseThrow(() -> new PatientNotFoundExceptions("Paciente no encontrado. Id " + id + " no existe."));
+        return PatientMapper.toDTO(patient);
+    } */
 
 
 
