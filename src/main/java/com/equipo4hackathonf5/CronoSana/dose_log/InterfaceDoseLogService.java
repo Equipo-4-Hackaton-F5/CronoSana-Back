@@ -8,14 +8,6 @@ import com.equipo4hackathonf5.CronoSana.implementations.IService;
 
 public interface InterfaceDoseLogService extends IService<DoseLogResponseDTO, DoseLogRequestDTO> {
 
-    List<DoseLogResponseDTO> getDoseLogEntities();
-
-    DoseLogResponseDTO createEntity(DoseLogRequestDTO dtoRequest);
-
-    DoseLogResponseDTO updateEntity(Long id, DoseLogRequestDTO dtoRequest);
-
-    void deleteDoseLogEntity(Long id);
-
     DoseLogResponseDTO markAsTaken(Long id);
 
     List<DoseLogResponseDTO> getBySchedule(Long scheduleId);

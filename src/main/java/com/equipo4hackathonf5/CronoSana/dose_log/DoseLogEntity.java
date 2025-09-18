@@ -1,6 +1,5 @@
 package com.equipo4hackathonf5.CronoSana.dose_log;
 
-import com.equipo4hackathonf5.CronoSana.medicine.MedicineEntity;
 import com.equipo4hackathonf5.CronoSana.schedule.MedicineStatus;
 import com.equipo4hackathonf5.CronoSana.schedule.ScheduleEntity;
 import jakarta.persistence.*;

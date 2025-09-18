@@ -1,7 +1,10 @@
 package com.equipo4hackathonf5.CronoSana.medicine;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,8 +22,6 @@ public class MedicineEntity {
 
     @Column(nullable = false)
     private String name;
-
-    private String description;
 
     @Column(name = "dose", nullable = false)
     private String dose;
